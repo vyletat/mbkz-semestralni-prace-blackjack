@@ -3,6 +3,8 @@ package cz.zcu.fav.kiv.mbkz.sp_blackjack;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,7 @@ public class GameActivity extends AppCompatActivity {
     ImageView hand_card_first, hand_card_second, hand_card_third, hand_card_fourth, hand_card_fifth;
     TextView bank, dealer_score, hand_score;
     Game game;
+    Button hit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +47,10 @@ public class GameActivity extends AppCompatActivity {
         hand_score = (TextView) findViewById(R.id.textView_hand_score);
 
         // Buttons
-        Button hit = (Button) findViewById(R.id.button_hit);
+        this.hit = (Button) findViewById(R.id.button_hit);
 
         this.game = new Game(1000, 52);
-        this.game.nextRound();
-        hit.performClick();
+        this.reset();
     }
 
     public void hit(View view) {
@@ -103,16 +105,36 @@ public class GameActivity extends AppCompatActivity {
         else if (this.game.getHandScore() == this.game.getGOAL()) {
             // Toast.makeText(this, "Noice!", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Vyhral jsi!")
-                    .setTitle("WIN WIN WIN");
+            builder.setMessage(R.string.win_header)
+                    .setTitle(R.string.win_text);
+            builder.setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    reset();
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+
+                }
+            });
             AlertDialog dialog = builder.create();
             dialog.show();
         }
         else {
             // Toast.makeText(this, "Goofy!", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Prohral jsi!")
-                    .setTitle("LOSE LOSE LOSE");
+            builder.setMessage(R.string.lose_header)
+                    .setTitle(R.string.lose_text);
+            builder.setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    reset();
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+
+                }
+            });
             AlertDialog dialog = builder.create();
             dialog.show();
         }
@@ -123,6 +145,25 @@ public class GameActivity extends AppCompatActivity {
 
     private void initGame() {
         // Todo: Sebrat to z nastaveni
+    }
 
+    private void reset() {
+
+        int cardBack = getResources().getIdentifier("card_back_blue", "drawable", getPackageName());
+
+        dealer_card_first.setImageResource(cardBack);
+        dealer_card_second.setImageResource(cardBack);
+        dealer_card_third.setImageResource(cardBack);
+        dealer_card_fourth.setImageResource(cardBack);
+        dealer_card_fifth.setImageResource(cardBack);
+
+        hand_card_first.setImageResource(cardBack);
+        hand_card_second.setImageResource(cardBack);
+        hand_card_third.setImageResource(cardBack);
+        hand_card_fourth.setImageResource(cardBack);
+        hand_card_fifth.setImageResource(cardBack);
+
+        this.game.nextRound();
+        this.hit.performClick();
     }
 }

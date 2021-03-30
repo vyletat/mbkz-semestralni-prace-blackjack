@@ -41,6 +41,8 @@ public class Game {
 
     public void nextRound() {
         this.counterRound = 0;
+        this.dealerScore = 0;
+        this.handScore = 0;
 
         this.dealersFive = this.dealerDeck.getNextFive();
         this.handsFive = this.handDeck.getNextFive();

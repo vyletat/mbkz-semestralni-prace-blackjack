@@ -10,6 +10,14 @@
     <string name="settings">Settings</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="win_header">Win</string>
+    <string name="lose_header">Lose</string>
+    <string name="win_text">You win the round!</string>
+    <string name="lose_text">You lose the round!</string>
+    <string name="continue_string">Continue</string>
+    <string name="main_menu">Main menu</string>
+    <string name="next_round">Next round</string>
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
