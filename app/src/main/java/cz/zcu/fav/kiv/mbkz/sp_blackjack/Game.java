@@ -22,12 +22,11 @@ public class Game {
     private int handRound, dealerRound;                   // current round 0-4
 
     // Score
-    private int dealerScore, handScore = 0;
+    private int dealerScore = 0, handScore = 0;
 
 
     public Game(int bankSum, int cardsInDeck) {
         this.bankSum = bankSum;
-        this.handRound = 0;
         this.dealerDeck = new CardDeck();
         this.handDeck = new CardDeck();
     }
@@ -36,10 +35,11 @@ public class Game {
      * FOR HAND
      */
     public void next() {
-        Log.v("Next", "Round index: " + this.handRound);
+        Log.v("Hand", "Round index: " + this.handRound);
 
-        // this.dealerScore += this.dealersFive.get(this.getCounterRound()).value;
-        this.handScore += this.handsFive.get(this.getHandRound()).value;
+            this.handScore += this.handsFive.get(this.getHandRound()+1).value;
+
+        Log.v("Hand", "Hand Score: " + this.handScore);
         this.handRound++;
     }
 
@@ -64,8 +64,9 @@ public class Game {
         this.handsFive = this.handDeck.getNextFive();
 
         // add first card score do total score of each site
-        this.dealerScore += this.dealersFive.get(this.getHandRound()).value;
+        this.dealerScore += this.dealersFive.get(this.getDealerRound()).value;
         this.handScore += this.handsFive.get(this.getHandRound()).value;
+
     }
 
     public int getBankSum() {

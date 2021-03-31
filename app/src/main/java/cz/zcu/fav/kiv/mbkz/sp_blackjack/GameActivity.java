@@ -53,6 +53,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void hit(View view) {
+        Log.v("Hit", "Hand round: " + this.game.getHandRound());
+        Log.v("Hit", "Hand score: " + this.game.getHandScore());
+
         int index = this.game.getHandRound();
 
         Card dealerCard = this.game.getDealersFive().get(index);
@@ -65,40 +68,30 @@ public class GameActivity extends AppCompatActivity {
             case 0:
                 dealer_card_fifth.setImageResource(dealerCardImage);
                 hand_card_fifth.setImageResource(handCardImage);
-                Log.v("Next", "fifth");
                 break;
             case 1:
-                //dealer_card_fourth.setImageResource(dealerCardImage);
                 hand_card_fourth.setImageResource(handCardImage);
-                Log.v("Next", "fourth");
                 break;
             case 2:
-                //dealer_card_third.setImageResource(dealerCardImage);
                 hand_card_third.setImageResource(handCardImage);
-                Log.v("Next", "third");
                 break;
             case 3:
-                //dealer_card_second.setImageResource(dealerCardImage);
                 hand_card_second.setImageResource(handCardImage);
-                Log.v("Next", "second");
                 break;
             case 4:
-                //dealer_card_first.setImageResource(dealerCardImage);
                 hand_card_first.setImageResource(handCardImage);
-                Log.v("Next", "first");
                 break;
             default:
-                //dealer_card_fifth.setImageResource(dealerCardImage);
                 hand_card_fifth.setImageResource(handCardImage);
-                Log.v("Next", "fifth");
                 break;
         }
 
         dealer_score.setText("" + this.game.getDealerScore());
         hand_score.setText("" + this.game.getHandScore());
+        // Log.v("Hit", "Hand score: " + this.game.getHandScore());
 
         if (this.game.getHandScore() < this.game.getGOAL()) {
-            Toast.makeText(this, "Malo!", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "Malo!", Toast.LENGTH_SHORT).show();
             this.game.next();
         }
         else if (this.game.getHandScore() == this.game.getGOAL()) {
@@ -146,6 +139,8 @@ public class GameActivity extends AppCompatActivity {
         if (this.game.getDealerScore() + MAX_CARD_SCORE <= GOAL) {
             this.game.nextDealer();
 
+            dealer_score.setText("" + this.game.getDealerScore());
+
             int index = this.game.getDealerRound();
             Card dealerCard = this.game.getDealersFive().get(index);
             int dealerCardImage = getResources().getIdentifier(dealerCard.resource, "drawable", getPackageName());
@@ -153,33 +148,21 @@ public class GameActivity extends AppCompatActivity {
             switch (index) {
                 case 0:
                     dealer_card_fifth.setImageResource(dealerCardImage);
-                    //hand_card_fifth.setImageResource(handCardImage);
-                    Log.v("Next", "fifth");
                     break;
                 case 1:
                     dealer_card_fourth.setImageResource(dealerCardImage);
-                    //hand_card_fourth.setImageResource(handCardImage);
-                    Log.v("Next", "fourth");
                     break;
                 case 2:
                     dealer_card_third.setImageResource(dealerCardImage);
-                    //hand_card_third.setImageResource(handCardImage);
-                    Log.v("Next", "third");
                     break;
                 case 3:
                     dealer_card_second.setImageResource(dealerCardImage);
-                    //hand_card_second.setImageResource(handCardImage);
-                    Log.v("Next", "second");
                     break;
                 case 4:
                     dealer_card_first.setImageResource(dealerCardImage);
-                    //hand_card_first.setImageResource(handCardImage);
-                    Log.v("Next", "first");
                     break;
                 default:
                     dealer_card_fifth.setImageResource(dealerCardImage);
-                    //hand_card_fifth.setImageResource(handCardImage);
-                    Log.v("Next", "fifth");
                     break;
             }
 
@@ -192,6 +175,8 @@ public class GameActivity extends AppCompatActivity {
                 // HRAJE
                 this.game.nextDealer();
 
+                dealer_score.setText("" + this.game.getDealerScore());
+
                 int index = this.game.getDealerRound();
                 Card dealerCard = this.game.getDealersFive().get(index);
                 int dealerCardImage = getResources().getIdentifier(dealerCard.resource, "drawable", getPackageName());
@@ -199,33 +184,21 @@ public class GameActivity extends AppCompatActivity {
                 switch (index) {
                     case 0:
                         dealer_card_fifth.setImageResource(dealerCardImage);
-                        //hand_card_fifth.setImageResource(handCardImage);
-                        Log.v("Next", "fifth");
                         break;
                     case 1:
                         dealer_card_fourth.setImageResource(dealerCardImage);
-                        //hand_card_fourth.setImageResource(handCardImage);
-                        Log.v("Next", "fourth");
                         break;
                     case 2:
                         dealer_card_third.setImageResource(dealerCardImage);
-                        //hand_card_third.setImageResource(handCardImage);
-                        Log.v("Next", "third");
                         break;
                     case 3:
                         dealer_card_second.setImageResource(dealerCardImage);
-                        //hand_card_second.setImageResource(handCardImage);
-                        Log.v("Next", "second");
                         break;
                     case 4:
                         dealer_card_first.setImageResource(dealerCardImage);
-                        //hand_card_first.setImageResource(handCardImage);
-                        Log.v("Next", "first");
                         break;
                     default:
                         dealer_card_fifth.setImageResource(dealerCardImage);
-                        //hand_card_fifth.setImageResource(handCardImage);
-                        Log.v("Next", "fifth");
                         break;
                 }
 
@@ -321,6 +294,14 @@ public class GameActivity extends AppCompatActivity {
         // Todo: Sebrat to z nastaveni
     }
 
+    private void winDialog() {
+
+    }
+
+    private void loseDialog() {
+
+    }
+
     /**
      *
      * @return
@@ -394,33 +375,21 @@ public class GameActivity extends AppCompatActivity {
         switch (index) {
             case 0:
                 dealer_card_fifth.setImageResource(dealerCardImage);
-                //hand_card_fifth.setImageResource(handCardImage);
-                Log.v("Next", "fifth");
                 break;
             case 1:
                 dealer_card_fourth.setImageResource(dealerCardImage);
-                //hand_card_fourth.setImageResource(handCardImage);
-                Log.v("Next", "fourth");
                 break;
             case 2:
                 dealer_card_third.setImageResource(dealerCardImage);
-                //hand_card_third.setImageResource(handCardImage);
-                Log.v("Next", "third");
                 break;
             case 3:
                 dealer_card_second.setImageResource(dealerCardImage);
-                //hand_card_second.setImageResource(handCardImage);
-                Log.v("Next", "second");
                 break;
             case 4:
                 dealer_card_first.setImageResource(dealerCardImage);
-                //hand_card_first.setImageResource(handCardImage);
-                Log.v("Next", "first");
                 break;
             default:
                 dealer_card_fifth.setImageResource(dealerCardImage);
-                //hand_card_fifth.setImageResource(handCardImage);
-                Log.v("Next", "fifth");
                 break;
         }
     }
