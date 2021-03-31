@@ -88,59 +88,24 @@ public class GameActivity extends AppCompatActivity {
 
         dealer_score.setText("" + this.game.getDealerScore());
         hand_score.setText("" + this.game.getHandScore());
-        // Log.v("Hit", "Hand score: " + this.game.getHandScore());
 
         if (this.game.getHandScore() < this.game.getGOAL()) {
-            // Toast.makeText(this, "Malo!", Toast.LENGTH_SHORT).show();
             this.game.next();
         }
         else if (this.game.getHandScore() == this.game.getGOAL()) {
-            // Toast.makeText(this, "Noice!", Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.win_header)
-                    .setTitle(R.string.win_text);
-            builder.setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    reset();
-                }
-            });
-            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            winDialog();
         }
         else {
-            // Toast.makeText(this, "Goofy!", Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.lose_header)
-                    .setTitle(R.string.lose_text);
-            builder.setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    reset();
-                }
-            });
-            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            loseDialog();
         }
     }
 
     public void stand(View view) {
         final int MAX_CARD_SCORE = 10;
-        final int GOAL = 21;
 
-        if (this.game.getDealerScore() + MAX_CARD_SCORE <= GOAL) {
+        if (this.game.getDealerScore() + MAX_CARD_SCORE <= game.getGOAL()) {
             this.game.nextDealer();
-
             dealer_score.setText("" + this.game.getDealerScore());
-
             int index = this.game.getDealerRound();
             Card dealerCard = this.game.getDealersFive().get(index);
             int dealerCardImage = getResources().getIdentifier(dealerCard.resource, "drawable", getPackageName());
@@ -171,12 +136,10 @@ public class GameActivity extends AppCompatActivity {
         } else {
             int nextCard = this.probabilityNextCard();
 
-            if (this.game.getDealerScore() + nextCard <= GOAL) {
+            if (this.game.getDealerScore() + nextCard <= game.getGOAL()) {
                 // HRAJE
                 this.game.nextDealer();
-
                 dealer_score.setText("" + this.game.getDealerScore());
-
                 int index = this.game.getDealerRound();
                 Card dealerCard = this.game.getDealersFive().get(index);
                 int dealerCardImage = getResources().getIdentifier(dealerCard.resource, "drawable", getPackageName());
@@ -205,44 +168,14 @@ public class GameActivity extends AppCompatActivity {
                 this.stand.performClick();
             } else {
                 // KONCI
-                Toast.makeText(this, "Konci!", Toast.LENGTH_SHORT).show();
-
-                // porovnat score
+                // Porovnat score
                 if (this.game.getDealerScore() == this.game.getGOAL()) {
                     // LOSE
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage(R.string.lose_header)
-                            .setTitle(R.string.lose_text);
-                    builder.setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            reset();
-                        }
-                    });
-                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    loseDialog();
                 }
                 else if (this.game.getDealerScore() > this.game.getGOAL()) {
                     // WIN
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage(R.string.win_header)
-                            .setTitle(R.string.win_text);
-                    builder.setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            reset();
-                        }
-                    });
-                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    winDialog();
                 } else {
                     int dealerDiff = this.game.getGOAL() - this.game.getDealerScore();
                     int handDiff = this.game.getGOAL() - this.game.getHandScore();
@@ -252,38 +185,10 @@ public class GameActivity extends AppCompatActivity {
                     }
                     else if (dealerDiff < handDiff) {
                         // LOSE
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setMessage(R.string.lose_header)
-                                .setTitle(R.string.lose_text);
-                        builder.setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                reset();
-                            }
-                        });
-                        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+                        loseDialog();
                     } else {
                         // WIN
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setMessage(R.string.win_header)
-                                .setTitle(R.string.win_text);
-                        builder.setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                reset();
-                            }
-                        });
-                        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+                        winDialog();
                     }
                 }
             }
@@ -295,11 +200,37 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void winDialog() {
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.win_header)
+                .setMessage(R.string.win_text)
+                .setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        reset();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) { }
+                })
+                .setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void loseDialog() {
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.lose_text)
+                .setTitle(R.string.lose_header).setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            reset();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                })
+                .setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     /**
