@@ -35,17 +35,18 @@ public class Game {
      * FOR HAND
      */
     public void next() {
-        Log.v("Hand", "Round index: " + this.handRound);
-
-            this.handScore += this.handsFive.get(this.getHandRound()+1).value;
-
-        Log.v("Hand", "Hand Score: " + this.handScore);
         this.handRound++;
+        Log.v("Hand", "Round index: " + this.handRound);
+        this.handScore += this.handsFive.get(this.getHandRound()).value;
+        Log.v("Hand", "Hand Score: " + this.handScore);
+
     }
 
     public void nextDealer() {
         this.dealerRound++;
+        Log.v("Dealer", "Dealer index: " + this.dealerRound);
         this.dealerScore += this.dealersFive.get(this.getDealerRound()).value;
+        Log.v("Dealer", "Dealer Score: " + this.dealerScore);
     }
 
     private void stop() {
@@ -54,8 +55,8 @@ public class Game {
 
     public void nextRound() {
         // init zero
-        this.dealerRound = 0;
-        this.handRound = 0;
+        this.dealerRound = -1;
+        this.handRound = -1;
         this.dealerScore = 0;
         this.handScore = 0;
 
@@ -64,8 +65,8 @@ public class Game {
         this.handsFive = this.handDeck.getNextFive();
 
         // add first card score do total score of each site
-        this.dealerScore += this.dealersFive.get(this.getDealerRound()).value;
-        this.handScore += this.handsFive.get(this.getHandRound()).value;
+        // this.dealerScore += this.dealersFive.get(this.getDealerRound()).value;
+        // this.handScore += this.handsFive.get(this.getHandRound()).value;
 
     }
 
