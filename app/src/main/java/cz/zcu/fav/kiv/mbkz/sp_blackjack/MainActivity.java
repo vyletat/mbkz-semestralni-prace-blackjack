@@ -34,4 +34,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RulesActivity.class);
         startActivity(intent);
     }
+
+    public void scoreboard(View view) {
+        Intent intent = new Intent(this, ScoreboardActivity.class);
+        startActivity(intent);
+    }
 }

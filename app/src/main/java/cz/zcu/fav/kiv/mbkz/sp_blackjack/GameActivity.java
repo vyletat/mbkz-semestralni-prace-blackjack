@@ -1,10 +1,11 @@
 package cz.zcu.fav.kiv.mbkz.sp_blackjack;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import cz.zcu.fav.kiv.mbkz.sp_blackjack.game.Card;
+import cz.zcu.fav.kiv.mbkz.sp_blackjack.game.Game;
 
 public class GameActivity extends AppCompatActivity {
     ImageView dealer_card_first, dealer_card_second, dealer_card_third, dealer_card_fourth, dealer_card_fifth;
@@ -42,7 +46,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Score and money
         bank = (TextView) findViewById(R.id.textView_bank);
-        bet_amount = (TextView) findViewById(R.id.textView_betAmount);
+        bet_amount = (TextView) findViewById(R.id.textView_bet_amount);
         dealer_score = (TextView) findViewById(R.id.textView_dealer_score);
         hand_score = (TextView) findViewById(R.id.textView_hand_score);
 
@@ -57,24 +61,27 @@ public class GameActivity extends AppCompatActivity {
         bet.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                bet_amount.setText("" + bet.getProgress());
+                // set step
+                progress = recalculateBetValue(progress);
+                bet_amount.setText(String.valueOf(progress));
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
         initGame();
         hit.setEnabled(false);
         stand.setEnabled(false);
+    }
 
+    private int recalculateBetValue(int progress) {
+        progress = progress / 100;
+        progress = progress * 100;
+        return progress;
     }
 
     private void initGame() {
@@ -93,7 +100,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void bet(View view) {
-        int betAmount = bet.getProgress();
+        int betAmount = recalculateBetValue(bet.getProgress());
         game.setBet(betAmount);
 
         hit.setEnabled(true);
@@ -106,7 +113,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void resetCardBack() {
-        int cardBack = getResources().getIdentifier("card_back_blue", "drawable", getPackageName());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String cardBackColor = prefs.getString("list_preference_card_back_color", "blue");
+        String cardBackName = "card_back_" + cardBackColor;
+        Log.v("Settings", cardBackColor);
+
+        int cardBack = getResources().getIdentifier(cardBackName, "drawable", getPackageName());
 
         dealer_card_first.setImageResource(cardBack);
         dealer_card_second.setImageResource(cardBack);
@@ -186,7 +198,9 @@ public class GameActivity extends AppCompatActivity {
                     int handDiff = this.game.getGOAL() - this.game.getHandScore();
 
                     if (dealerDiff == handDiff) {
-                        // Plichta
+                        // DRAW
+                        drawDialog();
+                        game.drawRound();
                     }
                     else if (dealerDiff < handDiff) {
                         // LOSE
@@ -301,6 +315,24 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void drawDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.draw_text)
+                .setTitle(R.string.draw_header).setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        reset();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private void loseGameDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.lose_game_text)
@@ -372,5 +404,24 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         return nextCard;
+    }
+
+    public void surrender(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.surrender_text)
+                .setTitle(R.string.surrender_header)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                })
+                .setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

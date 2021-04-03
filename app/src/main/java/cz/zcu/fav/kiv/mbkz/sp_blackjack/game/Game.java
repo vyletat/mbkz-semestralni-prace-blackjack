@@ -1,4 +1,4 @@
-package cz.zcu.fav.kiv.mbkz.sp_blackjack;
+package cz.zcu.fav.kiv.mbkz.sp_blackjack.game;
 
 import android.util.Log;
 
@@ -75,6 +75,8 @@ public class Game {
         bankSum -= bet;
     }
 
+    public void drawRound() { }
+
     /*
     ------ GETTERS ------
      */
@@ -122,4 +124,6 @@ public class Game {
     public void setBet(int bet) {
         this.bet = bet;
     }
+
+
 }

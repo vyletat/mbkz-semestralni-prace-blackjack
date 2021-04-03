@@ -58,7 +58,7 @@
         android:layout_marginStart="170dp"
         android:layout_marginEnd="183dp"
         android:layout_marginBottom="20dp"
-        android:text="TextView"
+        android:text="@string/author"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -75,4 +75,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_scoreboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="139dp"
+        android:layout_marginBottom="108dp"
+        android:text="@string/scoreboard"
+        app:layout_constraintBottom_toTopOf="@+id/textView_autor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_rules" />
 </androidx.constraintlayout.widget.ConstraintLayout>

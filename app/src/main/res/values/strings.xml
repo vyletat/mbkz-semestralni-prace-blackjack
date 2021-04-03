@@ -12,14 +12,20 @@
     <string name="cancel">Cancel</string>
     <string name="win_header">Win</string>
     <string name="lose_header">Lose</string>
-    <string name="lose_game_header">Lose</string>
+    <string name="draw_header">Draw</string>
+    <string name="lose_game_header">Game over</string>
+    <string name="surrender_header">Surrender</string>
     <string name="win_text">You win the round! :)</string>
     <string name="lose_text">You lose the round! :(</string>
+    <string name="draw_text">It is draw!</string>
     <string name="lose_game_text">Your bet is too high!</string>
+    <string name="surrender_text">Are you sure, that you want to surrender?</string>
     <string name="continue_string">Continue</string>
     <string name="main_menu">Main menu</string>
     <string name="next_round">Next round</string>
     <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -36,4 +42,12 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="place_bet">Place bet</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="game">Game</string>
+    <string name="player_name">Player name</string>
+    <string name="card_back_color">Card back color</string>
+    <string name="default_bank">Default bank</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="scoreboard">Scoreboard</string>
+    <string name="author">Tomáš Vyleta, 2021</string>
 </resources>

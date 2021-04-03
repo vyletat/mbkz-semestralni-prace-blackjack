@@ -1,4 +1,4 @@
-package cz.zcu.fav.kiv.mbkz.sp_blackjack;
+package cz.zcu.fav.kiv.mbkz.sp_blackjack.game;
 
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.enums.Rank;
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.enums.Suit;

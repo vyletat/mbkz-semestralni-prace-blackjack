@@ -1,35 +1,30 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <PreferenceCategory app:title="@string/messages_header">
-
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/game">
         <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
-
+            android:defaultValue="Player1"
+            android:key="edit_text_preference_player_name"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/player_name" />
+        <EditTextPreference
+            android:inputType="numberDecimal"
+            android:digits="0123456789"
+            android:defaultValue="10000"
+            android:key="edit_text_preference_default_bank"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/default_bank" />
         <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
+            android:defaultValue="blue"
+            android:entries="@array/card_back_entries"
+            android:entryValues="@array/card_back_entryValue"
+            android:inputType="number"
+            android:key="list_preference_card_back_color"
+            android:title="@string/card_back_color" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_preference_dark_mode"
+            android:title="@string/dark_mode" />
     </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/sync_header">
-
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
-
-    </PreferenceCategory>
-
 </PreferenceScreen>
