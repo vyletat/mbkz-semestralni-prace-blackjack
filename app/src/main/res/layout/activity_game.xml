@@ -202,7 +202,7 @@
                         android:text="BET" />
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/textView_betAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -220,6 +220,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="bet"
                     android:text="@string/place_bet" />
 
             </LinearLayout>

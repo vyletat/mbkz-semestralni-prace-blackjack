@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +16,10 @@ import android.widget.TextView;
 public class GameActivity extends AppCompatActivity {
     ImageView dealer_card_first, dealer_card_second, dealer_card_third, dealer_card_fourth, dealer_card_fifth;
     ImageView hand_card_first, hand_card_second, hand_card_third, hand_card_fourth, hand_card_fifth;
-    TextView bank, dealer_score, hand_score;
+    TextView bank, bet_amount, dealer_score, hand_score;
     Button hit, stand, place_bet, surrender;
     SeekBar bet;
     Game game;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Score and money
         bank = (TextView) findViewById(R.id.textView_bank);
+        bet_amount = (TextView) findViewById(R.id.textView_betAmount);
         dealer_score = (TextView) findViewById(R.id.textView_dealer_score);
         hand_score = (TextView) findViewById(R.id.textView_hand_score);
 
@@ -53,27 +54,58 @@ public class GameActivity extends AppCompatActivity {
 
         // Seekbar
         bet = (SeekBar) findViewById(R.id.seekBar_bet);
+        bet.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                bet_amount.setText("" + bet.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         initGame();
-        //hit.setEnabled(false);
-        //stand.setEnabled(false);
-        this.reset();
+        hit.setEnabled(false);
+        stand.setEnabled(false);
+
     }
 
     private void initGame() {
         // Todo: Sebrat to z nastaveni
-        int bankSum = 1000;
+        int bankSum = 10000;
+        bank.setText("" + bankSum);
 
-        this.game = new Game(bankSum, 52);
+        game = new Game(bankSum, 52);
         bet.setMax(bankSum);
-
+        // TODO: MIN
         double doubleProgress = (double) bankSum * 0.5;
         int progress = (int) doubleProgress;
-
         bet.setProgress(progress);
+
+        resetCardBack();
     }
 
-    private void reset() {
+    public void bet(View view) {
+        int betAmount = bet.getProgress();
+        game.setBet(betAmount);
+
+        hit.setEnabled(true);
+        stand.setEnabled(true);
+
+        reset();
+
+        bet.setEnabled(false);
+        place_bet.setEnabled(false);
+    }
+
+    private void resetCardBack() {
         int cardBack = getResources().getIdentifier("card_back_blue", "drawable", getPackageName());
 
         dealer_card_first.setImageResource(cardBack);
@@ -87,16 +119,22 @@ public class GameActivity extends AppCompatActivity {
         hand_card_third.setImageResource(cardBack);
         hand_card_fourth.setImageResource(cardBack);
         hand_card_fifth.setImageResource(cardBack);
-
-        this.game.nextRound();
-        this.nextDealer();
-        this.hit.performClick();
     }
 
-    public void bet() {
+    private void reset() {
+        resetCardBack();
 
-        hit.setEnabled(true);
-        stand.setEnabled(true);
+        // Overovani jestli ma na dalsi sazku
+        if (game.getBankSum() >= game.getBet()) {
+            // OK
+            this.game.nextRound();
+            bank.setText("" + game.getBankSum());
+            this.nextDealer();
+            this.hit.performClick();
+        } else {
+            // GAME END - Prilis velka sazka
+            loseGameDialog();
+        }
     }
 
     public void hit(View view) {
@@ -104,9 +142,15 @@ public class GameActivity extends AppCompatActivity {
 
         if (this.game.getHandScore() > this.game.getGOAL()) {
             loseDialog();
+            game.loseRound();
         }
         else if (this.game.getHandScore() == this.game.getGOAL()) {
             winDialog();
+            game.winRound();
+        } else {
+            if (game.getHandRound() == 4) {
+                stand.performClick();
+            }
         }
     }
 
@@ -131,10 +175,12 @@ public class GameActivity extends AppCompatActivity {
                 if (this.game.getDealerScore() == this.game.getGOAL()) {
                     // LOSE
                     loseDialog();
+                    game.loseRound();
                 }
                 else if (this.game.getDealerScore() > this.game.getGOAL()) {
                     // WIN
                     winDialog();
+                    game.winRound();
                 } else {
                     int dealerDiff = this.game.getGOAL() - this.game.getDealerScore();
                     int handDiff = this.game.getGOAL() - this.game.getHandScore();
@@ -145,9 +191,11 @@ public class GameActivity extends AppCompatActivity {
                     else if (dealerDiff < handDiff) {
                         // LOSE
                         loseDialog();
+                        game.loseRound();
                     } else {
                         // WIN
                         winDialog();
+                        game.winRound();
                     }
                 }
             }
@@ -226,7 +274,9 @@ public class GameActivity extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) { }
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
                 })
                 .setCancelable(false);
         AlertDialog dialog = builder.create();
@@ -243,7 +293,22 @@ public class GameActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            finish();
                         }
+                })
+                .setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void loseGameDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.lose_game_text)
+                .setTitle(R.string.lose_game_header)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
                 })
                 .setCancelable(false);
         AlertDialog dialog = builder.create();

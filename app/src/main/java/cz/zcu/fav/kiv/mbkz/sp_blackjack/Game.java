@@ -5,26 +5,24 @@ import android.util.Log;
 import java.util.List;
 
 public class Game {
+    // Round WIN score
     private final int GOAL = 21;
 
     // Money
-    private int bankSum, bet;
+    private int bankSum;
+    private int bet;
 
     // Cards
     private CardDeck dealerDeck, handDeck;
     List<Card> dealersFive, handsFive;
 
-    public int getDealerRound() {
-        return dealerRound;
-    }
-
     // Counters
-    private int handRound, dealerRound;                   // current round 0-4
+    private int handRound, dealerRound;
 
     // Score
     private int dealerScore = 0, handScore = 0;
 
-
+    // Constructor
     public Game(int bankSum, int cardsInDeck) {
         this.bankSum = bankSum;
         this.dealerDeck = new CardDeck();
@@ -67,8 +65,19 @@ public class Game {
         // add first card score do total score of each site
         // this.dealerScore += this.dealersFive.get(this.getDealerRound()).value;
         // this.handScore += this.handsFive.get(this.getHandRound()).value;
-
     }
+
+    public void winRound() {
+        bankSum += bet;
+    }
+
+    public void loseRound() {
+        bankSum -= bet;
+    }
+
+    /*
+    ------ GETTERS ------
+     */
 
     public int getBankSum() {
         return bankSum;
@@ -86,14 +95,6 @@ public class Game {
         return handScore;
     }
 
-    public CardDeck getDealerDeck() {
-        return dealerDeck;
-    }
-
-    public CardDeck getHandDeck() {
-        return handDeck;
-    }
-
     public List<Card> getDealersFive() {
         return dealersFive;
     }
@@ -104,5 +105,21 @@ public class Game {
 
     public int getGOAL() {
         return GOAL;
+    }
+
+    public int getBet() {
+        return bet;
+    }
+
+    public int getDealerRound() {
+        return dealerRound;
+    }
+
+    /*
+    ------ SETTERS ------
+     */
+
+    public void setBet(int bet) {
+        this.bet = bet;
     }
 }
