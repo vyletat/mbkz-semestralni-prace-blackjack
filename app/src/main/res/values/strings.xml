@@ -27,6 +27,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <!-- Rules -->
+
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
