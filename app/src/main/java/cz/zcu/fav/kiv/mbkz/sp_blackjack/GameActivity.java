@@ -6,6 +6,7 @@ import androidx.preference.PreferenceManager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ public class GameActivity extends AppCompatActivity {
     Button hit, stand, place_bet, surrender;
     SeekBar bet;
     Game game;
+    MediaPlayer mpBet, mpNewRound, mpWin, mpLose, mpDraw, mpHit, mpGameOver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,14 @@ public class GameActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
+        // Media players
+        mpBet = MediaPlayer.create(this, R.raw.bet);
+        mpNewRound = MediaPlayer.create(this, R.raw.new_round);
+        mpWin = MediaPlayer.create(this, R.raw.win);
+        mpLose = MediaPlayer.create(this, R.raw.lose);
+        mpGameOver = MediaPlayer.create(this, R.raw.game_over);
+        mpHit = MediaPlayer.create(this, R.raw.hit);
+
         initGame();
         hit.setEnabled(false);
         stand.setEnabled(false);
@@ -107,6 +117,7 @@ public class GameActivity extends AppCompatActivity {
         stand.setEnabled(true);
 
         reset();
+        mpBet.start();
 
         bet.setEnabled(false);
         place_bet.setEnabled(false);
@@ -143,22 +154,27 @@ public class GameActivity extends AppCompatActivity {
             bank.setText("" + game.getBankSum());
             this.nextDealer();
             this.hit.performClick();
+            this.hit.performClick();
         } else {
             // GAME END - Prilis velka sazka
             loseGameDialog();
+            mpGameOver.start();
         }
     }
 
     public void hit(View view) {
         nextHand();
+        mpHit.start();
 
         if (this.game.getHandScore() > this.game.getGOAL()) {
             loseDialog();
             game.loseRound();
+            mpLose.start();
         }
         else if (this.game.getHandScore() == this.game.getGOAL()) {
             winDialog();
             game.winRound();
+            mpWin.start();
         } else {
             if (game.getHandRound() == 4) {
                 stand.performClick();
@@ -188,11 +204,13 @@ public class GameActivity extends AppCompatActivity {
                     // LOSE
                     loseDialog();
                     game.loseRound();
+                    mpLose.start();
                 }
                 else if (this.game.getDealerScore() > this.game.getGOAL()) {
                     // WIN
                     winDialog();
                     game.winRound();
+                    mpWin.start();
                 } else {
                     int dealerDiff = this.game.getGOAL() - this.game.getDealerScore();
                     int handDiff = this.game.getGOAL() - this.game.getHandScore();
@@ -206,10 +224,12 @@ public class GameActivity extends AppCompatActivity {
                         // LOSE
                         loseDialog();
                         game.loseRound();
+                        mpLose.start();
                     } else {
                         // WIN
                         winDialog();
                         game.winRound();
+                        mpWin.start();
                     }
                 }
             }
