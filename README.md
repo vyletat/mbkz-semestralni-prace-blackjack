@@ -35,16 +35,17 @@ Pro tuto hru, jsem se ale rozhodl pro vlastní algoritmus, který je založen na
  * Jádro hry ✔️
  * ReferenceActivity - udělat activity, ve které budou odkazy na autora
     * Webový odkaz
- * Sepsat pravidla hry
+ * Sepsat pravidla hry ✔️
  * na Game over nebo vzdání hry, zapsat score - Scoreboard
     * Vymyset systém bodování
 * Night mode - změna během runu aplikace ✔️
-* Ošetření dealera pro i > 5
+* Ošetření dealera pro i > 5 ✔️
 * Settings - pouze Number input
 * ikona aplikace
 * Pozadí v MENU
     * možná zelené pozadí ve hře
 * zvuky do hry ✔️
-* Přidat do appBaru zpět
+* Přidat do appBaru zpět ✔️
 * Algoritmus 
+* Překlad
  

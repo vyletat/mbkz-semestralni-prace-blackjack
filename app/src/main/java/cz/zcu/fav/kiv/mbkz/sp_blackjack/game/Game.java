@@ -18,6 +18,7 @@ public class Game {
 
     // Counters
     private int handRound, dealerRound;
+    private int win_count;
 
     // Score
     private int dealerScore = 0, handScore = 0;
@@ -27,6 +28,7 @@ public class Game {
         this.bankSum = bankSum;
         this.dealerDeck = new CardDeck();
         this.handDeck = new CardDeck();
+        this.win_count = 0;
     }
 
     /**
@@ -69,6 +71,7 @@ public class Game {
 
     public void winRound() {
         bankSum += bet;
+        win_count++;
     }
 
     public void loseRound() {
@@ -76,6 +79,11 @@ public class Game {
     }
 
     public void drawRound() { }
+
+    public int getScore() {
+        // Vzorec: sazka/1000 * počet vítěžství
+        return (bet / 1000) * win_count;
+    }
 
     /*
     ------ GETTERS ------

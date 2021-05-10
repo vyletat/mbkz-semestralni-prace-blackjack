@@ -9,17 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SP_Blackjack">
-        <activity android:name=".ReferenceActivity"></activity>
-        <activity android:name=".ScoreboardActivity" />
+        <activity android:name=".ReferenceActivity" android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".ScoreboardActivity" android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".RulesActivity" />
-        <activity android:name=".GameActivity" />
+        <activity android:name=".RulesActivity" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".GameActivity" android:screenOrientation="portrait" android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

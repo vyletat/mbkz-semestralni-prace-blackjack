@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import cz.zcu.fav.kiv.mbkz.sp_blackjack.database.FeedReaderContract;
+import cz.zcu.fav.kiv.mbkz.sp_blackjack.database.FeedReaderDbHelper;
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.game.Card;
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.game.Game;
 
@@ -26,11 +31,33 @@ public class GameActivity extends AppCompatActivity {
     SeekBar bet;
     Game game;
     MediaPlayer mpBet, mpNewRound, mpWin, mpLose, mpDraw, mpHit, mpGameOver;
+    SQLiteDatabase db;
+    String player_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // Hide Action Appbar
+        getSupportActionBar().hide();
+
+        // Orientation settings
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean orientation = prefs.getBoolean("switch_preference_game_landscape", false);
+        Log.v("Settings", orientation.toString());
+        if (orientation) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        // Player name
+        this.player_name = prefs.getString("edit_text_preference_player_name", "Unknown_player");
+
+        //Database
+        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(this);
+        // Gets the data repository in write mode
+        this.db = dbHelper.getWritableDatabase();
 
         // Dealer cards
         dealer_card_first = (ImageView) findViewById(R.id.imageView);
@@ -159,6 +186,16 @@ public class GameActivity extends AppCompatActivity {
             // GAME END - Prilis velka sazka
             loseGameDialog();
             mpGameOver.start();
+
+            // Pridani score do databaze
+            // Create a new map of values, where column names are the keys
+            ContentValues values = new ContentValues();
+            values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PLAYER, player_name);
+            values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE, game.getScore());
+            // Insert the new row, returning the primary key value of the new row
+            long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
+            Log.v("Database", "Zapsani do database: " + player_name + " se scorem " + game.getScore());
+
         }
     }
 
@@ -432,6 +469,15 @@ public class GameActivity extends AppCompatActivity {
                 .setTitle(R.string.surrender_header)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        // Pridani score do databaze
+                        // Create a new map of values, where column names are the keys
+                        ContentValues values = new ContentValues();
+                        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PLAYER, player_name);
+                        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE, game.getScore());
+                        // Insert the new row, returning the primary key value of the new row
+                        long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
+                        Log.v("Database", "Zapsani do database: " + player_name + " se scorem " + game.getScore());
+
                         finish();
                     }
                 })
@@ -444,4 +490,5 @@ public class GameActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
 }
