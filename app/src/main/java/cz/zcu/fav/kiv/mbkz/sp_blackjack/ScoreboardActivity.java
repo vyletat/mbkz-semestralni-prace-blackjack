@@ -39,9 +39,7 @@ public class ScoreboardActivity extends AppCompatActivity {
         };
 
         // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE + " DESC";
-
+        String sortOrder = FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE + " DESC";
         Cursor cursor = db.query(
                 FeedReaderContract.FeedEntry.TABLE_NAME,   // The table to query
                 null,             // The array of columns to return (pass null to get all)
@@ -53,8 +51,10 @@ public class ScoreboardActivity extends AppCompatActivity {
                 "10"        // limit
         );
 
+        /*
         List scoreList = new ArrayList<>();
         List playerList = new ArrayList<>();
+         */
         StringBuilder builder = new StringBuilder();
         while(cursor.moveToNext()) {
             String playerName = cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_PLAYER));
@@ -64,8 +64,10 @@ public class ScoreboardActivity extends AppCompatActivity {
             builder.append(System.getProperty("line.separator"));
             scoreboard = builder.toString();
 
+            /*
             playerList.add(playerName);
             scoreList.add(score);
+             */
 
             Log.v("Database", "SELECT: Player name = " + playerName + ", Score = " + score);
         }

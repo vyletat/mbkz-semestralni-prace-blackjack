@@ -20,6 +20,11 @@ public class CardDeck {
         this.shuffle();
     }
 
+    /**
+     * Vytvori vsechny karty a z nich balicek.
+     *
+     * @return  
+     */
     private List<Card> createDeck() {
         List<Card> deck = new ArrayList<>(CARDS_IN_DECK);
         // ACE
@@ -87,6 +92,7 @@ public class CardDeck {
         deck.add(new Card(Rank.KING, Suit.DIAMONDS, 10, "king_of_diamonds"));
         deck.add(new Card(Rank.KING, Suit.HEARTS, 10, "king_of_hearts"));
         deck.add(new Card(Rank.KING, Suit.SPADES, 10, "king_of_spades"));
+
         return deck;
     }
 

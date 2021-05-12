@@ -4,25 +4,21 @@ import android.util.Log;
 
 import java.util.List;
 
+/**
+ * Trida pro chod jedne instandce hry.
+ */
 public class Game {
     // Round WIN score
     private final int GOAL = 21;
-
     // Money
     private int bankSum;
     private int bet;
-
     // Cards
     private CardDeck dealerDeck, handDeck;
     List<Card> dealersFive, handsFive;
-
     // Counters
     private int handRound, dealerRound;
-
-
-
     private int winCount, gameRounds;
-
     // Score
     private int dealerScore = 0, handScore = 0;
 
@@ -37,25 +33,26 @@ public class Game {
     }
 
     /**
-     * FOR HAND
+     * Dalsi tah pro HRACE.
      */
     public void next() {
         this.handRound++;
         this.handScore += this.handsFive.get(this.getHandRound()).value;
         Log.v("Game", "HAND " + this.gameRounds + "-" + this.handRound + ": Hand Score = " + this.handScore);
-
     }
 
+    /**
+     * Dalsi tah pro DEALERA.
+     */
     public void nextDealer() {
         this.dealerRound++;
         this.dealerScore += this.dealersFive.get(this.getDealerRound()).value;
         Log.v("Game", "DEALER " + this.gameRounds + "-" + this.dealerRound + ": Hand Score = " + this.dealerScore);
     }
 
-    private void stop() {
-
-    }
-
+    /**
+     * Zacatek noveho kola.
+     */
     public void nextRound() {
         // init zero
         this.dealerRound = -1;
@@ -74,12 +71,18 @@ public class Game {
         this.gameRounds++;
     }
 
+    /**
+     * Hrac vyhral kolo.
+     */
     public void winRound() {
         bankSum += bet;
         winCount++;
         Log.v("Game", "PLAYER WIN ROUND: Total win count = " + this.winCount);
     }
 
+    /**
+     * Hrac prohral kolo.
+     */
     public void loseRound() {
         bankSum -= bet;
         Log.v("Game", "DEALER WIN ROUND");
@@ -87,6 +90,11 @@ public class Game {
 
     public void drawRound() { }
 
+    /**
+     * Vypocet vysledneho score do databaze.
+     *
+     * @return      Vypoctene score.
+     */
     public int getScore() {
         // Vzorec: sazka/1000 * počet vítěžství
         return (bet / 1000) * winCount;

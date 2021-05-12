@@ -16,6 +16,7 @@ public class RulesActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(R.string.rules);
 
+        // Set HTML content
         TextView rules = (TextView) findViewById(R.id.rules_content);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             rules.setText(Html.fromHtml(getString(R.string.rules_content), Html.FROM_HTML_MODE_COMPACT));

@@ -10,6 +10,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+
+/**
+ * @author Bc. Tomas Vyleta
+ * @version 1.0
+ */
+
+/**
+ * Hlavni aktivita pro menu aplikace.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean nightMode = prefs.getBoolean("switch_preference_dark_mode", false);
-        Log.v("Settings", nightMode.toString());
+        Log.v("Settings", "Night mode = " + nightMode.toString());
 
         // Nigh mode
         if (nightMode) {
@@ -31,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Method for change activity to GameActivity.
+     * Metoda pro zmenu aktivity na GameActivity.
      * @see GameActivity
      *
      * @param view
@@ -41,16 +50,34 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Metoda pro zmenu aktivity na SettingsActivity.
+     * @see SettingsActivity
+     *
+     * @param view
+     */
     public void settings(View view) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Metoda pro zmenu aktivity na RulesActivity.
+     * @see RulesActivity
+     *
+     * @param view
+     */
     public void rules(View view) {
         Intent intent = new Intent(this, RulesActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Metoda pro zmenu aktivity na ScoreboardActivity.
+     * @see ScoreboardActivity
+     *
+     * @param view
+     */
     public void scoreboard(View view) {
         Intent intent = new Intent(this, ScoreboardActivity.class);
         startActivity(intent);

@@ -103,7 +103,7 @@ public class GameActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
-        // Media players
+        // Media players - sounds
         mpBet = MediaPlayer.create(this, R.raw.bet);
         mpNewRound = MediaPlayer.create(this, R.raw.new_round);
         mpWin = MediaPlayer.create(this, R.raw.win);
@@ -116,12 +116,22 @@ public class GameActivity extends AppCompatActivity {
         stand.setEnabled(false);
     }
 
+    /**
+     * Metoda pro spravne prepocitani hodnot v seek baru.
+     *
+     * @param progress      Zvolena hodnota
+     *
+     * @return              Prepocitana zvolena hodnota.
+     */
     private int recalculateBetValue(int progress) {
         progress = progress / 100;
         progress = progress * 100;
         return progress;
     }
 
+    /**
+     * Inicializace hry.
+     */
     private void initGame() {
         // Todo: Sebrat to z nastaveni
         int bankSum = 10000;
@@ -137,6 +147,11 @@ public class GameActivity extends AppCompatActivity {
         resetCardBack();
     }
 
+    /**
+     * Nastaveni sazky pro hru.
+     *
+     * @param view
+     */
     public void bet(View view) {
         int betAmount = recalculateBetValue(bet.getProgress());
         game.setBet(betAmount);
@@ -151,6 +166,9 @@ public class GameActivity extends AppCompatActivity {
         place_bet.setEnabled(false);
     }
 
+    /**
+     * Nastaveni lice karet.
+     */
     private void resetCardBack() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String cardBackColor = prefs.getString("list_preference_card_back_color", "blue");
@@ -172,6 +190,9 @@ public class GameActivity extends AppCompatActivity {
         hand_card_fifth.setImageResource(cardBack);
     }
 
+    /**
+     * Metoda pro resetovani herniho planu.
+     */
     private void reset() {
         resetCardBack();
 
@@ -201,6 +222,11 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Dalsi tah hrace.
+     *
+     * @param view
+     */
     public void hit(View view) {
         Log.v("Game", "PLAYER HIT");
 
@@ -223,6 +249,11 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Stani hrace.
+     *
+     * @param view
+     */
     public void stand(View view) {
         Log.v("Game", "PLAYER STANDS");
 
@@ -280,6 +311,9 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Dalsi tah hrace.
+     */
     public void nextHand() {
         this.game.next();
         Log.v("Hit", "Hand round: " + this.game.getHandRound());
@@ -312,6 +346,9 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Dalsi tah dealera.
+     */
     public void nextDealer() {
         game.nextDealer();
         int index = this.game.getDealerRound();
@@ -342,6 +379,9 @@ public class GameActivity extends AppCompatActivity {
         dealer_score.setText("" + this.game.getDealerScore());
     }
 
+    /**
+     * Dialog pro vyhru.
+     */
     private void winDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.win_header)
@@ -361,6 +401,9 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Dialog pro prohru.
+     */
     private void loseDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.lose_text)
@@ -379,6 +422,9 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Dialog pro remizu.
+     */
     private void drawDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.draw_text)
@@ -397,6 +443,9 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Dialog pro konec hry.
+     */
     private void loseGameDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.lose_game_text)
@@ -411,6 +460,11 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Metoda, kterou vyuziva dealer, která rozhoduje na zaklade pravdepodobnosti, jestli ma tahnout dal nebo ne.
+     *
+     * @return
+     */
     private int probabilityNextCard() {
         double random = Math.random();
         final double CARDS = 52.0;      // cards total
@@ -470,6 +524,11 @@ public class GameActivity extends AppCompatActivity {
         return nextCard;
     }
 
+    /**
+     * Pokud se hrac rozhodne ukoncit hru.
+     *
+     * @param view
+     */
     public void surrender(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.surrender_text)
