@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SP_Blackjack</string>
+    <string name="app_name">BlackNOjack</string>
     <string name="play">Play</string>
     <string name="rules">Rules</string>
     <string name="dealers_hand">Dealer´s hand</string>
@@ -54,38 +54,42 @@
     <string name="scoreboard">Scoreboard</string>
     <string name="author">Tomáš Vyleta, 2021</string>
     <string name="game_landscape">Game landscape</string>
-    <string name="rules_content"><![CDATA[
-    <h1>Hodnoty karet</h1>
+    <string name="rules_content"><![CDATA[<h1> Card values ​​</h1>
         <p>
-            Karty od dvojky do desítky (2 - 10) mají hodnotu uvedenou na kartě
-            Karty J (jack), Q (dáma) a K (král) mají hodnotu 10
-            Karta A (eso) má hodnotu 1 (zde je změna, hráč nemůže rozhodovat, jekou hodnotu bude mít karta)
+            Cards from two to ten (2 - 10) have the value indicated on the card.
+            The cards J (jack), Q (queen) and K (king) have a value of 10,
+            card A (ace) has a value of 1 (there is a change, the player cannot decide what value the card will have).
         </p>
 
-    <h1>Cíl hry</h1>
+    <h1> Goal of the game </h1>
         <p>
-            Princip hry je stejný a to ten, že hráč chce nashromáždit karty v hodnotě blíže celkovému součtu karet 21 než krupiér, ale nesmí překročit tuto hodnotu.
-            Hráč, jehož součet karet přesáhne 21. je vyřazen ze hry a prohrává.
-            V případě stejného počtu bodů hráče a krupiéra je hra nerozhodná a nevyhrává nikdo.
+            The principle of the game is the same, namely that the player wants to collect cards in a value closer to the total sum of 21 cards than the dealer, but must not exceed this value.
+            A player whose sum of cards exceeds 21. is eliminated from the game and loses.
+            In the case of the same number of player and croupier points, the game is a draw and no one wins.
         </p>
 
-    <h1>Průběh hry</h1>
-        <p>
-            Na začátku každé hry si musíte zvolit sázku a pak začne krupiér rozdávat karty.
-            Na začátku každého kola krupiér rozdá hráči dvě karty a sobě dá jednu kartu.
-            Po rozdání karet má hráč možnost 2 akcí:
-            dostat další kartu (Hit),
-            zůstat stát (Stand),
-            další možnosti jako Split a Double nejsou možné.
-        </p>
+    <h1> Game progress </h1>
+        <ol>
+            <li>At the beginning of each game, you have to choose a bet and then the dealer starts dealing cards.</li>
+            <li>At the beginning of each round, the dealer deals two cards to the player and gives him one card.</li>
+            <li>After the cards are dealt, the player has the option of 2 actions:</li>
+            <ul>
+                <li>get another card (Hit),</li>
+                <li>let dealer turn (Stand),</li>
+                <li>other options such as Split and Double are not possible.</li>
+            </ul>
+        </ol>
 
-    <h1>Krupiér a jeho hra</h1>
+    <h1> The croupier and his game </h1>
         <p>
-           V normální Blackjacku má krupiér určitá pravidla jak hrát:
-            rozdat si další kartu, pokud je součet jeho karet menší než 17,
-            zůstat stát ve chvíli, kdy je součet jeho karet 17 a vyšší.
-            Pro tuto hru, jsem se ale rozhodl pro vlastní algoritmus, který je založen na pravděpodobnosti a náhodě padnutí další karty.
-        </p>]]>
+           In normal Blackjack, the dealer has certain rules on how to play:
+            <ul>
+                <li>deal another card if the sum of his cards is less than 17,</li>
+                <li>stay standing when the sum of his cards is 17 and higher.</li>
+            </ul>
+            For this game, however, I opted for my own algorithm, which is based on the probability and chance of another card falling.
+        </p>
+    ]]>
     </string>
     <string name="wipeout">wipeout</string>
 </resources>

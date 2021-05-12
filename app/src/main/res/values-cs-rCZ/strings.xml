@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="play">Hrát</string>
+    <string name="rules">Pravidla</string>
+    <string name="dealers_hand">Krupiérovo karty</string>
+    <string name="yours_hand">Vaše karty</string>
+    <string name="hit">Další</string>
+    <string name="stand">Stát</string>
+    <string name="surrender">Vzdát se</string>
+    <string name="settings">Nastavení</string>
+    <string name="save">Uložit</string>
+    <string name="cancel">Zrušit</string>
+    <string name="win_header">Výhra</string>
+    <string name="lose_header">Prohra</string>
+    <string name="draw_header">Remíza</string>
+    <string name="lose_game_header">Konec hry</string>
+    <string name="surrender_header">Vzdát se</string>
+    <string name="win_text">Vyhrál jsi kolo! :)</string>
+    <string name="lose_text">Prohrál jsi kolo! :)</string>
+    <string name="draw_text">Je to remíza!</string>
+    <string name="lose_game_text">Vaše sízka je příliš vysoká!</string>
+    <string name="surrender_text">Jste si jistý, že se chcete vzdát?</string>
+    <string name="continue_string">Pokračovat</string>
+    <string name="main_menu">Hlavní menu</string>
+    <string name="next_round">Další kolo</string>
+    <string name="ok">Dobře</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="messages_header">Zprávy</string>
+    <string name="sync_header">Sync</string>
+    <string name="place_bet">Nastavit sázku</string>
+    <string name="game">Hra</string>
+    <string name="player_name">Jméno hráče</string>
+    <string name="card_back_color">Barva pozadí karet</string>
+    <string name="default_bank">Výchozí banka</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="scoreboard">Scoreboard</string>
+    <string name="author">Tomáš Vyleta, 2021</string>
+    <string name="game_landscape">Hra na šířku</string>
+    <string name="wipeout">Smazat</string>
+    <string name="rules_content"><![CDATA[
+    <h1>Hodnoty karet</h1>
+        <p>
+            Karty od dvojky do desítky (2 - 10) mají hodnotu uvedenou na kartě.
+            Karty J (jack), Q (dáma) a K (král) mají hodnotu 10, karta A (eso) má hodnotu 1 (zde je změna, hráč nemůže rozhodovat, jekou hodnotu bude mít karta).
+        </p>
+
+    <h1>Cíl hry</h1>
+        <p>
+            Princip hry je stejný a to ten, že hráč chce nashromáždit karty v hodnotě blíže celkovému součtu karet 21 než krupiér, ale nesmí překročit tuto hodnotu.
+            Hráč, jehož součet karet přesáhne 21. je vyřazen ze hry a prohrává.
+            V případě stejného počtu bodů hráče a krupiéra je hra nerozhodná a nevyhrává nikdo.
+        </p>
+
+    <h1>Průběh hry</h1>
+        <ol>
+            <li>Na začátku každé hry si musíte zvolit sázku a pak začne krupiér rozdávat karty.</li>
+            <li>Na začátku každého kola krupiér rozdá hráči dvě karty a sobě dá jednu kartu.</li>
+            <li>Po rozdání karet má hráč možnost 2 akcí:</li>
+            <ul>
+                <li>dostat další kartu (Hit),</li>
+                <li>zůstat stát (Stand),</li>
+                <li>další možnosti jako Split a Double nejsou možné.</li>
+            </ul>
+        </ol>
+
+    <h1>Krupiér a jeho hra</h1>
+        V normální Blackjacku má krupiér určitá pravidla jak hrát:
+            <ul>
+                <li>rozdat si další kartu, pokud je součet jeho karet menší než 17,</li>
+                <li>zůstat stát ve chvíli, kdy je součet jeho karet 17 a vyšší.</li>
+            </ul>
+            Pro tuto hru, jsem se ale rozhodl pro vlastní algoritmus, který je založen na pravděpodobnosti a náhodě padnutí další karty.]]>
+    </string>
+</resources>
