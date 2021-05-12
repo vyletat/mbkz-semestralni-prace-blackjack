@@ -1,5 +1,7 @@
 package cz.zcu.fav.kiv.mbkz.sp_blackjack.game;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -90,6 +92,7 @@ public class CardDeck {
 
     public void shuffle() {
         Collections.shuffle(this.deck);
+        Log.v("Game", "--- CARD SHUFFLE ---");
     }
 
     public List<Card> getNextFive() {

@@ -2,4 +2,6 @@
 <resources>
     <dimen name="primary">40</dimen>
     <dimen name="secondary">30</dimen>
+    <dimen name="inner_margin">10dp</dimen>
+    <dimen name="outer_margin">20dp</dimen>
 </resources>

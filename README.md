@@ -36,16 +36,18 @@
  * ReferenceActivity - udělat activity, ve které budou odkazy na autora
     * Webový odkaz
  * Sepsat pravidla hry ✔️
- * na Game over nebo vzdání hry, zapsat score - Scoreboard
-    * Vymyset systém bodování
+ * na Game over nebo vzdání hry, zapsat score - Scoreboard ✔
+    * Vymyset systém bodování ✔
 * Night mode - změna během runu aplikace ✔️
 * Ošetření dealera pro i > 5 ✔️
 * Settings - pouze Number input
-* ikona aplikace
+* Ikona aplikace
 * Pozadí v MENU
-    * možná zelené pozadí ve hře
-* zvuky do hry ✔️
+    * možná zelené pozadí ve hře ✔
+* Zvuky do hry ✔️
 * Přidat do appBaru zpět ✔️
 * Algoritmus 
-* Překlad
+* Překlad 
+* Button na wipe databáze 
+* Responsibilita herního plánu 
  

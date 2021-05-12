@@ -87,4 +87,5 @@
             Pro tuto hru, jsem se ale rozhodl pro vlastní algoritmus, který je založen na pravděpodobnosti a náhodě padnutí další karty.
         </p>]]>
     </string>
+    <string name="wipeout">wipeout</string>
 </resources>

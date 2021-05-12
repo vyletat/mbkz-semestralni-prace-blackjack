@@ -38,10 +38,6 @@ public class ScoreboardActivity extends AppCompatActivity {
                 FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE
         };
 
-        // Filter results WHERE "title" = 'My Title'
-        String selection = FeedReaderContract.FeedEntry.COLUMN_NAME_PLAYER + " = ?";
-        String[] selectionArgs = { "My Title" };
-
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
                 FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE + " DESC";
@@ -57,7 +53,6 @@ public class ScoreboardActivity extends AppCompatActivity {
                 "10"        // limit
         );
 
-        // HashMap
         List scoreList = new ArrayList<>();
         List playerList = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
@@ -72,7 +67,7 @@ public class ScoreboardActivity extends AppCompatActivity {
             playerList.add(playerName);
             scoreList.add(score);
 
-            Log.v("Database", "" + score);
+            Log.v("Database", "SELECT: Player name = " + playerName + ", Score = " + score);
         }
         cursor.close();
 

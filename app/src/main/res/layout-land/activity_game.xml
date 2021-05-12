@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:background="#4CAF50"
     android:orientation="horizontal"
+    android:weightSum="2"
     tools:context=".GameActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
@@ -33,7 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="@string/dealers_hand" />
+                android:text="@string/dealers_hand"
+                android:textAlignment="textEnd" />
 
             <TextView
                 android:id="@+id/textView_dealer_score"
@@ -42,13 +46,14 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
-                android:textColor="#F44336" />
+                android:textColor="#F44336"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/horizontal_dealer"
-            android:layout_width="409dp"
-            android:layout_height="175dp"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="93dp">
@@ -91,7 +96,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="34dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -99,7 +104,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="@string/yours_hand" />
+                android:text="@string/yours_hand"
+                android:textAlignment="textEnd" />
 
             <TextView
                 android:id="@+id/textView_hand_score"
@@ -108,13 +114,14 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
-                android:textColor="#4CAF50" />
+                android:textColor="#FFEB3B"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/horizontal_hand"
-            android:layout_width="409dp"
-            android:layout_height="145dp"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="307dp">
@@ -162,19 +169,23 @@
         android:id="@+id/horizontal_buttons"
         android:layout_width="322dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/horizontal_actions"
             android:layout_width="match_parent"
-            android:layout_height="91dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/outer_margin"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/button_hit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/inner_margin"
                 android:layout_weight="1"
+                android:minHeight="50dp"
                 android:onClick="hit"
                 android:text="@string/hit" />
 
@@ -182,7 +193,9 @@
                 android:id="@+id/button_stand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/inner_margin"
                 android:layout_weight="1"
+                android:minHeight="50dp"
                 android:onClick="stand"
                 android:text="@string/stand" />
         </LinearLayout>
@@ -190,7 +203,7 @@
         <LinearLayout
             android:id="@+id/horizontal_bet"
             android:layout_width="match_parent"
-            android:layout_height="118dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -226,21 +239,26 @@
                     android:id="@+id/seekBar_bet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:minHeight="30dp" />
 
                 <Button
                     android:id="@+id/button_place_bet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/inner_margin"
                     android:layout_weight="1"
+                    android:minHeight="50dp"
                     android:onClick="bet"
                     android:text="@string/place_bet" />
 
                 <Button
                     android:id="@+id/button_surrender"
                     android:layout_width="match_parent"
-                    android:layout_height="43dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/inner_margin"
                     android:layout_weight="1"
+                    android:minHeight="50dp"
                     android:onClick="surrender"
                     android:text="@string/surrender" />
 

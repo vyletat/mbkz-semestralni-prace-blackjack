@@ -18,7 +18,10 @@ public class Game {
 
     // Counters
     private int handRound, dealerRound;
-    private int win_count;
+
+
+
+    private int winCount, gameRounds;
 
     // Score
     private int dealerScore = 0, handScore = 0;
@@ -28,7 +31,9 @@ public class Game {
         this.bankSum = bankSum;
         this.dealerDeck = new CardDeck();
         this.handDeck = new CardDeck();
-        this.win_count = 0;
+        this.winCount = 0;
+        this.gameRounds = 0;
+        Log.v("Game", "GAME INIT: Bank = " + this.bankSum);
     }
 
     /**
@@ -36,17 +41,15 @@ public class Game {
      */
     public void next() {
         this.handRound++;
-        Log.v("Hand", "Round index: " + this.handRound);
         this.handScore += this.handsFive.get(this.getHandRound()).value;
-        Log.v("Hand", "Hand Score: " + this.handScore);
+        Log.v("Game", "HAND " + this.gameRounds + "-" + this.handRound + ": Hand Score = " + this.handScore);
 
     }
 
     public void nextDealer() {
         this.dealerRound++;
-        Log.v("Dealer", "Dealer index: " + this.dealerRound);
         this.dealerScore += this.dealersFive.get(this.getDealerRound()).value;
-        Log.v("Dealer", "Dealer Score: " + this.dealerScore);
+        Log.v("Game", "DEALER " + this.gameRounds + "-" + this.dealerRound + ": Hand Score = " + this.dealerScore);
     }
 
     private void stop() {
@@ -67,22 +70,26 @@ public class Game {
         // add first card score do total score of each site
         // this.dealerScore += this.dealersFive.get(this.getDealerRound()).value;
         // this.handScore += this.handsFive.get(this.getHandRound()).value;
+
+        this.gameRounds++;
     }
 
     public void winRound() {
         bankSum += bet;
-        win_count++;
+        winCount++;
+        Log.v("Game", "PLAYER WIN ROUND: Total win count = " + this.winCount);
     }
 
     public void loseRound() {
         bankSum -= bet;
+        Log.v("Game", "DEALER WIN ROUND");
     }
 
     public void drawRound() { }
 
     public int getScore() {
         // Vzorec: sazka/1000 * počet vítěžství
-        return (bet / 1000) * win_count;
+        return (bet / 1000) * winCount;
     }
 
     /*
@@ -125,12 +132,16 @@ public class Game {
         return dealerRound;
     }
 
+    public int getWinCount() {
+        return winCount;
+    }
     /*
     ------ SETTERS ------
      */
 
     public void setBet(int bet) {
         this.bet = bet;
+        Log.v("Game", "GAME BET: Bet = " + this.bet);
     }
 
 

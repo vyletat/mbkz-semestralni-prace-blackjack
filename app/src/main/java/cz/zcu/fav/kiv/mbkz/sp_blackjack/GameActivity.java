@@ -45,7 +45,7 @@ public class GameActivity extends AppCompatActivity {
         // Orientation settings
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean orientation = prefs.getBoolean("switch_preference_game_landscape", false);
-        Log.v("Settings", orientation.toString());
+        Log.v("Settings", "Game landscape = " + orientation.toString());
         if (orientation) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
@@ -53,6 +53,7 @@ public class GameActivity extends AppCompatActivity {
         }
         // Player name
         this.player_name = prefs.getString("edit_text_preference_player_name", "Unknown_player");
+        Log.v("Settings", "Player name = " + this.player_name);
 
         //Database
         FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(this);
@@ -154,7 +155,7 @@ public class GameActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String cardBackColor = prefs.getString("list_preference_card_back_color", "blue");
         String cardBackName = "card_back_" + cardBackColor;
-        Log.v("Settings", cardBackColor);
+        Log.v("Settings", "Card back color = " + this.player_name);
 
         int cardBack = getResources().getIdentifier(cardBackName, "drawable", getPackageName());
 
@@ -194,12 +195,15 @@ public class GameActivity extends AppCompatActivity {
             values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE, game.getScore());
             // Insert the new row, returning the primary key value of the new row
             long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
-            Log.v("Database", "Zapsani do database: " + player_name + " se scorem " + game.getScore());
+            Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() +" / 1000) * "+ game.getWinCount() + " = " + game.getScore() + "]");
+            Log.v("Database", "INSERT: Player name = " + player_name + ", Score = " + game.getScore());
 
         }
     }
 
     public void hit(View view) {
+        Log.v("Game", "PLAYER HIT");
+
         nextHand();
         mpHit.start();
 
@@ -220,6 +224,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void stand(View view) {
+        Log.v("Game", "PLAYER STANDS");
+
         final int MAX_CARD_SCORE = 10;
 
         if (this.game.getDealerScore() + MAX_CARD_SCORE <= game.getGOAL()) {
@@ -254,6 +260,7 @@ public class GameActivity extends AppCompatActivity {
 
                     if (dealerDiff == handDiff) {
                         // DRAW
+                        Log.v("Game", "DRAW");
                         drawDialog();
                         game.drawRound();
                     }
@@ -476,7 +483,10 @@ public class GameActivity extends AppCompatActivity {
                         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE, game.getScore());
                         // Insert the new row, returning the primary key value of the new row
                         long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
-                        Log.v("Database", "Zapsani do database: " + player_name + " se scorem " + game.getScore());
+
+                        Log.v("Game", "PLAYER SURRENDER");
+                        Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() +" / 1000) * "+ game.getWinCount() + " = " + game.getScore() + "]");
+                        Log.v("Database", "INSERT: Player name = " + player_name + ", Score = " + game.getScore());
 
                         finish();
                     }

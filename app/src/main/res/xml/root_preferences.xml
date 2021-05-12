@@ -8,9 +8,9 @@
             android:singleLine="true"
             android:title="@string/player_name" />
         <EditTextPreference
-            android:inputType="numberDecimal"
-            android:digits="0123456789"
             android:defaultValue="10000"
+            android:digits="0123456789"
+            android:inputType="numberDecimal"
             android:key="edit_text_preference_default_bank"
             android:selectAllOnFocus="true"
             android:singleLine="true"
