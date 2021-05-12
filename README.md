@@ -42,12 +42,13 @@
 * Ošetření dealera pro i > 5 ✔️
 * Settings - pouze Number input
 * Ikona aplikace
-* Pozadí v MENU
+* Pozadí v MENU ✔️
     * možná zelené pozadí ve hře ✔
 * Zvuky do hry ✔️
 * Přidat do appBaru zpět ✔️
-* Algoritmus 
-* Překlad 
+* Algoritmus ✔️
+* Překlad ✔️
 * Button na wipe databáze 
-* Responsibilita herního plánu 
+* Responsibilita herního plánu ✔️
+* Osetrenmi zmacknuti back ✔️
  

@@ -116,6 +116,11 @@ public class GameActivity extends AppCompatActivity {
         stand.setEnabled(false);
     }
 
+    @Override
+    public void onBackPressed() {
+        surrender.performClick();
+    }
+
     /**
      * Metoda pro spravne prepocitani hodnot v seek baru.
      *
