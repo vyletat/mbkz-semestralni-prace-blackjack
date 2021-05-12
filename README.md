@@ -41,7 +41,7 @@
 * Night mode - změna během runu aplikace ✔️
 * Ošetření dealera pro i > 5 ✔️
 * Settings - pouze Number input
-* Ikona aplikace
+* Ikona aplikace ✔️
 * Pozadí v MENU ✔️
     * možná zelené pozadí ve hře ✔
 * Zvuky do hry ✔️
@@ -50,5 +50,7 @@
 * Překlad ✔️
 * Button na wipe databáze 
 * Responsibilita herního plánu ✔️
-* Osetrenmi zmacknuti back ✔️
+* Osetreni zmacknuti back ✔️
+* Nove barvy ✔️
+
  
