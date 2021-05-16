@@ -4,16 +4,16 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static cz.zcu.fav.kiv.mbkz.sp_blackjack.database.FeedReaderContract.SQL_CREATE_ENTRIES;
-import static cz.zcu.fav.kiv.mbkz.sp_blackjack.database.FeedReaderContract.SQL_DELETE_ENTRIES;
+import static cz.zcu.fav.kiv.mbkz.sp_blackjack.database.ScoreboardContract.SQL_CREATE_ENTRIES;
+import static cz.zcu.fav.kiv.mbkz.sp_blackjack.database.ScoreboardContract.SQL_DELETE_ENTRIES;
 
 
-public class FeedReaderDbHelper extends SQLiteOpenHelper {
+public class ScoreboardDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "score.db";
 
-    public FeedReaderDbHelper(Context context) {
+    public ScoreboardDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

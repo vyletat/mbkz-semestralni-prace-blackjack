@@ -92,4 +92,7 @@
     ]]>
     </string>
     <string name="wipeout">wipeout</string>
+    <string name="truncate_database_text">Are you sure, that you want delete all data from scoreboard?</string>
+    <string name="truncate_database_header">Truncate database</string>
+    <string name="truncate_database_toast">Database was succesfully truncate!</string>
 </resources>

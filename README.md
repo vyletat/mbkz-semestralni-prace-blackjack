@@ -48,7 +48,7 @@
 * Přidat do appBaru zpět ✔️
 * Algoritmus ✔️
 * Překlad ✔️
-* Button na wipe databáze 
+* Button na wipe databáze ✔️
 * Responsibilita herního plánu ✔️
 * Osetreni zmacknuti back ✔️
 * Nove barvy ✔️

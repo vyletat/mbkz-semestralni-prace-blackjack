@@ -18,8 +18,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import cz.zcu.fav.kiv.mbkz.sp_blackjack.database.FeedReaderContract;
-import cz.zcu.fav.kiv.mbkz.sp_blackjack.database.FeedReaderDbHelper;
+import cz.zcu.fav.kiv.mbkz.sp_blackjack.database.ScoreboardContract;
+import cz.zcu.fav.kiv.mbkz.sp_blackjack.database.ScoreboardDbHelper;
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.game.Card;
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.game.Game;
 
@@ -56,7 +56,7 @@ public class GameActivity extends AppCompatActivity {
         Log.v("Settings", "Player name = " + this.player_name);
 
         //Database
-        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(this);
+        ScoreboardDbHelper dbHelper = new ScoreboardDbHelper(this);
         // Gets the data repository in write mode
         this.db = dbHelper.getWritableDatabase();
 
@@ -217,10 +217,10 @@ public class GameActivity extends AppCompatActivity {
             // Pridani score do databaze
             // Create a new map of values, where column names are the keys
             ContentValues values = new ContentValues();
-            values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PLAYER, player_name);
-            values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE, game.getScore());
+            values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_PLAYER, player_name);
+            values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_SCORE, game.getScore());
             // Insert the new row, returning the primary key value of the new row
-            long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
+            long newRowId = db.insert(ScoreboardContract.ScoreEntry.TABLE_NAME, null, values);
             Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() +" / 1000) * "+ game.getWinCount() + " = " + game.getScore() + "]");
             Log.v("Database", "INSERT: Player name = " + player_name + ", Score = " + game.getScore());
 
@@ -543,10 +543,10 @@ public class GameActivity extends AppCompatActivity {
                         // Pridani score do databaze
                         // Create a new map of values, where column names are the keys
                         ContentValues values = new ContentValues();
-                        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PLAYER, player_name);
-                        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_SCORE, game.getScore());
+                        values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_PLAYER, player_name);
+                        values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_SCORE, game.getScore());
                         // Insert the new row, returning the primary key value of the new row
-                        long newRowId = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
+                        long newRowId = db.insert(ScoreboardContract.ScoreEntry.TABLE_NAME, null, values);
 
                         Log.v("Game", "PLAYER SURRENDER");
                         Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() +" / 1000) * "+ game.getWinCount() + " = " + game.getScore() + "]");

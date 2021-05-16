@@ -22,7 +22,7 @@
             android:editable="false"
             android:gravity="center"
             android:text="BANK_SCORE"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:layout_editor_absoluteX="171dp"
             tools:layout_editor_absoluteY="19dp" />
 
