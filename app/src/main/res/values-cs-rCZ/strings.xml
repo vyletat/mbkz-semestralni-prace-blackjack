@@ -72,4 +72,7 @@
             </ul>
             Pro tuto hru, jsem se ale rozhodl pro vlastní algoritmus, který je založen na pravděpodobnosti a náhodě padnutí další karty.]]>
     </string>
+    <string name="truncate_database_text">Jste si jistí, že chcete smazat všechny záznamy z tabulky scoreboard?</string>
+    <string name="truncate_database_header">Vymazat záznamy</string>
+    <string name="truncate_database_toast">Záznamy byly úspěšně smazány!</string>
 </resources>

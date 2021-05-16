@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SP_Blackjack">
-        <activity android:name=".ReferenceActivity" android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".ScoreboardActivity" android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".SettingsActivity"
