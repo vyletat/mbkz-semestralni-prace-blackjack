@@ -17,6 +17,7 @@
         android:gravity="center"
         android:text="BANK_SCORE"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/primaryTextColor"
         tools:layout_editor_absoluteX="171dp"
         tools:layout_editor_absoluteY="19dp" />
 
@@ -39,7 +40,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="0"
-            android:textColor="#F44336"
+            android:textColor="@color/primaryColor"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -47,6 +49,7 @@
         android:id="@+id/horizontal_dealer"
         android:layout_width="match_parent"
         android:layout_height="120dp"
+        android:layout_marginBottom="@dimen/outer_margin"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="93dp">
@@ -106,7 +109,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="0"
-            android:textColor="#FFEB3B"
+            android:textColor="@color/secondaryColor"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -214,7 +218,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="BET" />
+                        android:text="@string/bet" />
 
                     <TextView
                         android:id="@+id/textView_bet_amount"

@@ -42,7 +42,7 @@
     <h1>Hodnoty karet</h1>
         <p>
             Karty od dvojky do desítky (2 - 10) mají hodnotu uvedenou na kartě.
-            Karty J (jack), Q (dáma) a K (král) mají hodnotu 10, karta A (eso) má hodnotu 1 (zde je změna, hráč nemůže rozhodovat, jekou hodnotu bude mít karta).
+            Karty J (jack), Q (dáma) a K (král) mají hodnotu 10, karta A (eso) má hodnotu 1 (zde je změna, hráč nemůže rozhodovat, jakou hodnotu bude mít karta).
         </p>
 
     <h1>Cíl hry</h1>
@@ -75,4 +75,5 @@
     <string name="truncate_database_text">Jste si jistí, že chcete smazat všechny záznamy z tabulky scoreboard?</string>
     <string name="truncate_database_header">Vymazat záznamy</string>
     <string name="truncate_database_toast">Záznamy byly úspěšně smazány!</string>
+    <string name="bet">Sázka</string>
 </resources>
