@@ -88,7 +88,12 @@ public class Game {
         Log.v("Game", "DEALER WIN ROUND");
     }
 
-    public void drawRound() { }
+    /**
+     * Remiza
+     */
+    public void drawRound() {
+        Log.v("Game", "IT IS A DRAW");
+    }
 
     /**
      * Vypocet vysledneho score do databaze.
@@ -143,6 +148,7 @@ public class Game {
     public int getWinCount() {
         return winCount;
     }
+
     /*
     ------ SETTERS ------
      */

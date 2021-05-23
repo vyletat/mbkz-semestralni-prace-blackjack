@@ -106,10 +106,12 @@ public class GameActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) { }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
 
         // Media players - sounds
@@ -133,9 +135,8 @@ public class GameActivity extends AppCompatActivity {
     /**
      * Metoda pro spravne prepocitani hodnot v seek baru.
      *
-     * @param progress      Zvolena hodnota
-     *
-     * @return              Prepocitana zvolena hodnota.
+     * @param progress Zvolena hodnota
+     * @return Prepocitana zvolena hodnota.
      */
     private int recalculateBetValue(int progress) {
         progress = progress / 100;
@@ -223,7 +224,7 @@ public class GameActivity extends AppCompatActivity {
             values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_SCORE, game.getScore());
             // Insert the new row, returning the primary key value of the new row
             long newRowId = db.insert(ScoreboardContract.ScoreEntry.TABLE_NAME, null, values);
-            Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() +" / 1000) * "+ game.getWinCount() + " = " + game.getScore() + "]");
+            Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() + " / 1000) * " + game.getWinCount() + " = " + game.getScore() + "]");
             Log.v("Database", "INSERT: Player name = " + player_name + ", Score = " + game.getScore());
         }
     }
@@ -245,8 +246,7 @@ public class GameActivity extends AppCompatActivity {
                 loseDialog();
                 game.loseRound();
                 mpLose.start();
-            }
-            else if (this.game.getHandScore() == this.game.getGOAL()) {
+            } else if (this.game.getHandScore() == this.game.getGOAL()) {
                 winDialog();
                 game.winRound();
                 mpWin.start();
@@ -256,7 +256,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         } else {
-            nextDealer();
+            stand.performClick();
         }
     }
 
@@ -275,7 +275,6 @@ public class GameActivity extends AppCompatActivity {
             if (this.game.getDealerScore() + MAX_CARD_SCORE <= game.getGOAL()) {
                 nextDealer();
                 this.stand.performClick();
-
             } else {
                 int nextCard = this.probabilityNextCard();
 
@@ -303,8 +302,7 @@ public class GameActivity extends AppCompatActivity {
             loseDialog();
             game.loseRound();
             mpLose.start();
-        }
-        else if (this.game.getDealerScore() > this.game.getGOAL()) {
+        } else if (this.game.getDealerScore() > this.game.getGOAL()) {
             // WIN
             winDialog();
             game.winRound();
@@ -315,11 +313,9 @@ public class GameActivity extends AppCompatActivity {
 
             if (dealerDiff == handDiff) {
                 // DRAW
-                Log.v("Game", "DRAW");
                 drawDialog();
                 game.drawRound();
-            }
-            else if (dealerDiff < handDiff) {
+            } else if (dealerDiff < handDiff) {
                 // LOSE
                 loseDialog();
                 game.loseRound();
@@ -342,35 +338,30 @@ public class GameActivity extends AppCompatActivity {
         Log.v("Hit", "Hand score: " + this.game.getHandScore());
 
         int index = this.game.getHandRound();
-        if (index <= 4) {
-            Card handCard = this.game.getHandsFive().get(index);
-            int handCardImage = getResources().getIdentifier(handCard.resource, "drawable", getPackageName());
-            hand_score.setText("" + this.game.getHandScore());
+        Card handCard = this.game.getHandsFive().get(index);
+        int handCardImage = getResources().getIdentifier(handCard.resource, "drawable", getPackageName());
+        hand_score.setText("" + this.game.getHandScore());
 
-            switch (index) {
-                case 0:
-                    hand_card_fifth.setImageResource(handCardImage);
-                    break;
-                case 1:
-                    hand_card_fourth.setImageResource(handCardImage);
-                    break;
-                case 2:
-                    hand_card_third.setImageResource(handCardImage);
-                    break;
-                case 3:
-                    hand_card_second.setImageResource(handCardImage);
-                    break;
-                case 4:
-                    hand_card_first.setImageResource(handCardImage);
-                    break;
-                default:
-                    // Ukoncit kolo
-                    stand.performClick();
-                    break;
-            }
-        } else {
-            // Ukoncit kolo
-            stand.performClick();
+        switch (index) {
+            case 0:
+                hand_card_fifth.setImageResource(handCardImage);
+                break;
+            case 1:
+                hand_card_fourth.setImageResource(handCardImage);
+                break;
+            case 2:
+                hand_card_third.setImageResource(handCardImage);
+                break;
+            case 3:
+                hand_card_second.setImageResource(handCardImage);
+                break;
+            case 4:
+                hand_card_first.setImageResource(handCardImage);
+                break;
+            default:
+                // Ukoncit kolo
+                stand.performClick();
+                break;
         }
     }
 
@@ -380,37 +371,33 @@ public class GameActivity extends AppCompatActivity {
     public void nextDealer() {
         game.nextDealer();
         int index = this.game.getDealerRound();
-        if (index <= 4) {
-            Card dealerCard = this.game.getDealersFive().get(index);
-            int dealerCardImage = getResources().getIdentifier(dealerCard.resource, "drawable", getPackageName());
 
-            switch (index) {
-                case 0:
-                    dealer_card_fifth.setImageResource(dealerCardImage);
-                    break;
-                case 1:
-                    dealer_card_fourth.setImageResource(dealerCardImage);
-                    break;
-                case 2:
-                    dealer_card_third.setImageResource(dealerCardImage);
-                    break;
-                case 3:
-                    dealer_card_second.setImageResource(dealerCardImage);
-                    break;
-                case 4:
-                    dealer_card_first.setImageResource(dealerCardImage);
-                    break;
-                default:
-                    // Vyhodnot
-                    scoreEvaluated();
-                    break;
-            }
+        Card dealerCard = this.game.getDealersFive().get(index);
+        int dealerCardImage = getResources().getIdentifier(dealerCard.resource, "drawable", getPackageName());
 
-            dealer_score.setText("" + this.game.getDealerScore());
-        } else {
-            // Vyhodnot
-            scoreEvaluated();
+        switch (index) {
+            case 0:
+                dealer_card_fifth.setImageResource(dealerCardImage);
+                break;
+            case 1:
+                dealer_card_fourth.setImageResource(dealerCardImage);
+                break;
+            case 2:
+                dealer_card_third.setImageResource(dealerCardImage);
+                break;
+            case 3:
+                dealer_card_second.setImageResource(dealerCardImage);
+                break;
+            case 4:
+                dealer_card_first.setImageResource(dealerCardImage);
+                break;
+            default:
+                // Vyhodnot
+                scoreEvaluated();
+                break;
         }
+
+        dealer_score.setText("" + this.game.getDealerScore());
     }
 
     /**
@@ -421,7 +408,7 @@ public class GameActivity extends AppCompatActivity {
         builder.setTitle(R.string.win_header)
                 .setMessage(R.string.win_text)
                 .setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(DialogInterface dialog, int id) {
                         reset();
                     }
                 })
@@ -442,14 +429,14 @@ public class GameActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.lose_text)
                 .setTitle(R.string.lose_header).setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            reset();
-                    }
-                })
+            public void onClick(DialogInterface dialog, int id) {
+                reset();
+            }
+        })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
                 })
                 .setCancelable(false);
         AlertDialog dialog = builder.create();
@@ -463,10 +450,10 @@ public class GameActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.draw_text)
                 .setTitle(R.string.draw_header).setPositiveButton(R.string.next_round, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        reset();
-                    }
-                })
+            public void onClick(DialogInterface dialog, int id) {
+                reset();
+            }
+        })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
@@ -497,7 +484,7 @@ public class GameActivity extends AppCompatActivity {
     /**
      * Metoda, kterou vyuziva dealer, která rozhoduje na zaklade pravdepodobnosti, jestli ma tahnout dal nebo ne.
      *
-     * @return      Hodnota karty.
+     * @return Hodnota karty.
      */
     private int probabilityNextCard() {
         double random = Math.random();
@@ -578,7 +565,7 @@ public class GameActivity extends AppCompatActivity {
                         long newRowId = db.insert(ScoreboardContract.ScoreEntry.TABLE_NAME, null, values);
 
                         Log.v("Game", "PLAYER SURRENDER");
-                        Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() +" / 1000) * "+ game.getWinCount() + " = " + game.getScore() + "]");
+                        Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() + " / 1000) * " + game.getWinCount() + " = " + game.getScore() + "]");
                         Log.v("Database", "INSERT: Player name = " + player_name + ", Score = " + game.getScore());
 
                         finish();
