@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Game {
     // Round WIN score
-    private final int GOAL = 21;
+    private final int GOAL = 21;                //Goal hry
     // Money
     private int bankSum;
     private int bet;
