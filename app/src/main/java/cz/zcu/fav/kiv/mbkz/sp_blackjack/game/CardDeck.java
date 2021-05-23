@@ -9,6 +9,9 @@ import java.util.List;
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.enums.Rank;
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.enums.Suit;
 
+/**
+ * Trida spravující balicek karet.
+ */
 public class CardDeck {
     public final int CARDS_IN_DECK = 52;
     public int index;
@@ -23,7 +26,7 @@ public class CardDeck {
     /**
      * Vytvori vsechny karty a z nich balicek.
      *
-     * @return  
+     * @return  List všech karet.
      */
     private List<Card> createDeck() {
         List<Card> deck = new ArrayList<>(CARDS_IN_DECK);
@@ -96,11 +99,19 @@ public class CardDeck {
         return deck;
     }
 
+    /**
+     * Metoda pro zamíchání balíčku karet.
+     */
     public void shuffle() {
         Collections.shuffle(this.deck);
         Log.v("Game", "--- CARD SHUFFLE ---");
     }
 
+    /**
+     * Metoda pro vrácení dalších 5 karet pro hru.
+     *
+     * @return  List 5 karet.
+     */
     public List<Card> getNextFive() {
         List<Card> fiveCards = new ArrayList<>(5);
         int oldIndex = this.index;

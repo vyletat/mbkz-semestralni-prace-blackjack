@@ -3,6 +3,9 @@ package cz.zcu.fav.kiv.mbkz.sp_blackjack.game;
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.enums.Rank;
 import cz.zcu.fav.kiv.mbkz.sp_blackjack.enums.Suit;
 
+/**
+ * Trida reprezentujici jednu kartu.
+ */
 public class Card {
     public Rank rank;
     public Suit suit;

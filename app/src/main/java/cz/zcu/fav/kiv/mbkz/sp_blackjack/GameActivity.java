@@ -468,7 +468,7 @@ public class GameActivity extends AppCompatActivity {
     /**
      * Metoda, kterou vyuziva dealer, která rozhoduje na zaklade pravdepodobnosti, jestli ma tahnout dal nebo ne.
      *
-     * @return
+     * @return      Hodnota karty.
      */
     private int probabilityNextCard() {
         double random = Math.random();
