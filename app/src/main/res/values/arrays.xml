@@ -15,7 +15,7 @@
         <item>Blue</item>
         <item>Green</item>
         <item>Orange</item>
-        <item>Violet</item>
+        <item>Purple</item>
         <item>Red</item>
     </string-array>
 
@@ -24,7 +24,7 @@
         <item>blue</item>
         <item>green</item>
         <item>orange</item>
-        <item>violet</item>
+        <item>purple</item>
         <item>red</item>
     </string-array>
 </resources>
