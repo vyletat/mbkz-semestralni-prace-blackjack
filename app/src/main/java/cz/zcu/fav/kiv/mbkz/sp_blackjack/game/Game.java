@@ -102,7 +102,7 @@ public class Game {
      */
     public int getScore() {
         // Vzorec: sazka/1000 * počet vítěžství
-        return (bet / 1000) * winCount;
+        return (bet / 100) * winCount;
     }
 
     /*
