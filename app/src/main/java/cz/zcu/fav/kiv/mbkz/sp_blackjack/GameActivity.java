@@ -414,6 +414,18 @@ public class GameActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        // Pridani score do databaze
+                        // Create a new map of values, where column names are the keys
+                        ContentValues values = new ContentValues();
+                        values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_PLAYER, player_name);
+                        values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_SCORE, game.getScore());
+                        // Insert the new row, returning the primary key value of the new row
+                        long newRowId = db.insert(ScoreboardContract.ScoreEntry.TABLE_NAME, null, values);
+
+                        Log.v("Game", "PLAYER SURRENDER");
+                        Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() + " / 100) * " + game.getWinCount() + " = " + game.getScore() + "]");
+                        Log.v("Database", "INSERT: Player name = " + player_name + ", Score = " + game.getScore());
+
                         finish();
                     }
                 })
@@ -435,6 +447,17 @@ public class GameActivity extends AppCompatActivity {
         })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        // Pridani score do databaze
+                        // Create a new map of values, where column names are the keys
+                        ContentValues values = new ContentValues();
+                        values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_PLAYER, player_name);
+                        values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_SCORE, game.getScore());
+                        // Insert the new row, returning the primary key value of the new row
+                        long newRowId = db.insert(ScoreboardContract.ScoreEntry.TABLE_NAME, null, values);
+
+                        Log.v("Game", "PLAYER SURRENDER");
+                        Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() + " / 100) * " + game.getWinCount() + " = " + game.getScore() + "]");
+                        Log.v("Database", "INSERT: Player name = " + player_name + ", Score = " + game.getScore());
                         finish();
                     }
                 })
@@ -456,6 +479,17 @@ public class GameActivity extends AppCompatActivity {
         })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        // Pridani score do databaze
+                        // Create a new map of values, where column names are the keys
+                        ContentValues values = new ContentValues();
+                        values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_PLAYER, player_name);
+                        values.put(ScoreboardContract.ScoreEntry.COLUMN_NAME_SCORE, game.getScore());
+                        // Insert the new row, returning the primary key value of the new row
+                        long newRowId = db.insert(ScoreboardContract.ScoreEntry.TABLE_NAME, null, values);
+
+                        Log.v("Game", "PLAYER SURRENDER");
+                        Log.v("Game", "PLAYER SCORE: Bet = " + game.getBet() + ", Player win counter = " + game.getWinCount() + ", [(" + game.getBet() + " / 100) * " + game.getWinCount() + " = " + game.getScore() + "]");
+                        Log.v("Database", "INSERT: Player name = " + player_name + ", Score = " + game.getScore());
                         finish();
                     }
                 })
